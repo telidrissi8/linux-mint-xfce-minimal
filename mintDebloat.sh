@@ -57,21 +57,21 @@ while [ "$#" -gt 0 ]; do
     # Execute a specific portion of code based on the parameter
     case "$param" in
         laptop)
-            echo "Executing code for laptop mode..."
-            echo -e "yes\nyes\nno" | sudo apt-get install tlp || true
-			echo -e "yes\nyes\nno" | sudo apt-get install powertop || true
+            	echo "Executing code for laptop mode..."
+            	echo -e "yes\nyes\nno" | sudo apt-get install tlp || true
+		echo -e "yes\nyes\nno" | sudo apt-get install powertop || true
             ;;
 
         dev)
-            echo "Executing code for dev mode..."
-            flatpak install flathub -y org.gnome.meld
-			flatpak install flathub -y com.sublimetext.three
-			flatpak install flathub -y com.visualstudio.code
+            	echo "Executing code for dev mode..."
+            	flatpak install flathub -y org.gnome.meld
+	    	flatpak install flathub org.geany.Geany
+		flatpak install flathub -y com.visualstudio.code
             ;;
 
         *)
-            echo "Invalid parameter: $param. Please use 'laptop' or 'dev'."
-            exit 1
+            	echo "Invalid parameter: $param. Please use 'laptop' or 'dev'."
+            	exit 1
             ;;
     esac
 
