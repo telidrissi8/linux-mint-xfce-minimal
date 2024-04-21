@@ -32,12 +32,16 @@ echo -e "yes\nyes\nno" | sudo apt autoremove --purge parole || true
 echo -e "yes\nyes\nno" | sudo apt autoremove --purge warpinator || true
 echo -e "yes\nyes\nno" | sudo apt autoremove --purge webapp-manager || true
 echo -e "yes\nyes\nno" | sudo apt autoremove --purge hypnotix || true
+echo -e "yes\nyes\nno" | sudo apt autoremove --purge timeshift || true
+echo -e "yes\nyes\nno" | sudo apt autoremove --purge redshift* || true
+echo -e "yes\nyes\nno" | sudo apt autoremove --purge celluloid || true
 
 sudo apt-get clean || true
 sudo apt-get autoremove || true
 
 echo -e "yes\nyes\nno" | sudo apt-get install deborphan || true
 echo -e "yes\nyes\nno" | sudo apt-get install bleachbit || true
+echo -e "yes\nyes\nno" | sudo apt-get install vlc || true
 
 # Chrome
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
@@ -49,34 +53,7 @@ while [ -n "`deborphan`" ]; do
     echo -e "yes\nyes\nno" | sudo apt purge `deborphan`
 done
 
-
-# Loop through all provided parameters
-while [ "$#" -gt 0 ]; do
-    param="$1"
-
-    # Execute a specific portion of code based on the parameter
-    case "$param" in
-        laptop)
-            	echo "Executing code for laptop mode..."
-            	echo -e "yes\nyes\nno" | sudo apt-get install tlp || true
-		echo -e "yes\nyes\nno" | sudo apt-get install powertop || true
-            ;;
-
-        dev)
-            	echo "Executing code for dev mode..."
-            	flatpak install flathub -y org.gnome.meld
-	    	flatpak install flathub org.geany.Geany
-		flatpak install flathub -y com.visualstudio.code
-            ;;
-
-        *)
-            	echo "Invalid parameter: $param. Please use 'laptop' or 'dev'."
-            	exit 1
-            ;;
-    esac
-
-    # Shift to the next parameter
-    shift
-done
-
-flatpak install flathub -y io.gitlab.librewolf-community
+# Import xfce configuration
+rm -rf "$HOME/.config/xfce4"
+rm -rf "$HOME/.cache/xfce4"
+unzip -o "xfce4.zip" -d "$HOME/.config/"
